@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Таблица тест</title>
+       <style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  left:60px;
+}
+td{
+    width: 60px; 
+    height:60px; 
+    border: 1px solid #333; 
+    text-align:center;
+	background-color:	#4169E1;
+            }
+
+.add_coll {
+ width: 60px; 
+ height:60px; 
+ border: 1px solid #333; 
+
+ text-align:center;
+ 
+font-size: 3em;
+font-weight: bold;
+color: white;
+cursor: pointer;
+ background-color:orange;
+    
+  /* Position the tooltip */
+  position: absolute;
+  bottom: 100%;
+  top: 2px;
+  left: 100%;
+}
+.add_rows {
+ width: 60px; 
+ height:60px; 
+ border: 1px solid #333; 
+
+  
+ text-align:center;
+ 
+font-size: 3em;
+font-weight: bold;
+color: white;
+cursor: pointer;
+ background-color:orange;
+    
+  /* Position the tooltip */
+  position: absolute;
+  top: 100%; 
+  left:3px;
+}
+.del_rows {
+ display:none;
+ width: 60px; 
+ height:60px; 
+ border: 1px solid #333; 
+
+ text-align:center;
+ 
+font-size: 3em;
+font-weight: bold;
+color: white;
+cursor: pointer;
+ background:#DC143C;
+  transition: background 2s;
+    
+  /* Position the tooltip */
+  position: absolute;
+  top: 25%; 
+  right:100%;
+
+}
+.del_coll {
+ display: none;	
+ width: 60px; 
+ height:60px; 
+ border: 1px solid #333; 
+
+ text-align:center;
+ 
+font-size: 3em;
+font-weight: bold;
+color: white;
+cursor: pointer;
+ background:#DC143C;
+  transition: background 2s;
+    
+  /* Position the tooltip */
+  position: absolute;
+  top: -62px; 
+  left:50%;
+}
+.tooltip:hover div.hovMove > span{
+    display:block;
+   
+}
+ div.hovMove :hover {
+   background: 	#FFA07A;
+   
+}
+
+</style>
+    </head>
+    <body>
+	<br></br>
+<br></br>
+	
+<div class="tooltip">
+        <table id="myTable">
+            <tr>
+                <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>				
+            </tr>
+            <tr>
+                <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+			<tr>
+                <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+        </table>
+	 <div class="hovMove">	
+	 <span class="del_coll"  onClick="deleteColumn()">-</span>
+	 <span class="del_rows"  onClick="deleteRow()">-</span>
+	 </div>	
+	<span class="add_coll" onClick="addColumn()" >+</span>
+    <span class="add_rows" onClick="addRow()" >+</span>
+   
+    
+   </div>
+	<script>
+		function addRow(){
+			 var table = document.getElementById('myTable');
+			    //var row = document.getElementById("myTable");
+			 var x = table.insertRow(0);
+			 var e =table.rows.length-1;
+			 var l =table.rows[e].cells.length;
+			     //x.innerHTML = "&nbsp;";
+			 for (var c =0,  m=l; c < m; c++) {
+			 table.rows[0].insertCell(c);
+			 table.rows[0].cells[c].innerHTML  = "&nbsp;&nbsp;";
+}
+}
+				/*
+			 var table = document.getElementById('myTable');
+			 var x = table.insertRow(0);
+			 var e =table.rows.length-1;        // коллекция существующих строк таблицы
+			 var l =table.rows[e].cells.length;  // количество ячеек в последней существующей строке
+			     //x.innerHTML = "&nbsp;";
+			 for (var c =0,  m=l; c < m; c++) {
+			 table.rows[0].insertCell(c);	// или x[0].insertCell(c);
+			 table.rows[0].cells[c].innerHTML  = "&nbsp;&nbsp;";  // или x[0].cells[c].innerHTML  = "&nbsp;&nbsp;";
+			 
+			 // Или
+			 //var table = document.getElementById('myTable');
+			 //var new_row = table.rows[0].cloneNode(true);
+			 //table.appendChild( new_row );
+			 */
+
+		function addColumn(){
+			   var table = document.getElementById('myTable');
+				for (var r = 0, n = table.rows.length; r < n; r++) {
+						table.rows[r].insertCell(0);
+						table.rows[r].cells[0].innerHTML =  "&nbsp;&nbsp;" ;
+				}
+			}
+
+		function deleteRow() {
+			var table = document.getElementById('myTable');
+			var e =table.rows.length-1;
+			var l =table.rows[e].cells.length;
+			if (e == 1){
+			var element = document.getElementsByClassName("del_rows")[0].style  = "display:none;";
+			
+			}
+			if (e >= 1){
+			document.getElementById("myTable").deleteRow(-1);
+			}
+			
+		}
+
+		function deleteColumn() {
+		   // var row = document.getElementById("myRow");
+		 var table = document.getElementById('myTable');
+		 var col =table.rows[0].cells.length-1; //Кол-во столбцов
+		 if (col == 1){
+			var element = document.getElementsByClassName("del_coll")[0].style  = "display:none;";
+			
+			}
+		 for (var r = 0; col >= 1; r++) {
+			table.rows[r].deleteCell(-1);//var table handle удаление последнего столбца
+			}
+			
+		}	
+</script>		
+    </body>
+</html>
